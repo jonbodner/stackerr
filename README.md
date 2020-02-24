@@ -10,7 +10,7 @@ One of the biggest differences between errors in Go and exceptions in other lang
 is that you don't get a stack trace with a Go error. The `stackerr` package fixes this
 limitation.
 
-## Usage
+## Creating an error with a stack trace
 
 There are three different functions in the `stackerr` package for creating a stack trace:
 
@@ -65,11 +65,13 @@ func DoSomething(input string) (string, error) {
 }
 ```
 
-### Retrieving the stack trace
+## Retrieving the stack trace
 
-Once you have an error in your unwrap chain with a stack trace, there are two ways to get the trace back:
+Once you have an error in your unwrap chain with a stack trace, there are two ways to get the trace back.
 
-- Use the `stackerr.Trace` function to get a `[]string` that contains each line of
+### Trace
+
+Use the `stackerr.Trace` function to get a `[]string` that contains each line of
 the stack trace:
 
 ```go
@@ -102,7 +104,9 @@ Note that by default, the File path will include the absolute path to the file o
 machine that built the code. If you want to hide this path, build using the
 `-trimpath` flag.
 
-- Use the `%+v` formatting directive:
+### fmt Formatting and %+v
+
+Use the `%+v` formatting directive with `fmt.Printf` and variants to get the stack trace as a string. 
 
 ```go
 s := stackerr.New("This is a stack trace error")
@@ -113,7 +117,7 @@ This prints the stack trace using the `stackerr.StandardFormat`, with each level
 
 Note that this will not print out the stack trace if there is a `fmt.Errorf` wrapping the error with a stack trace. In those situations, you need to use `stackerr.Trace`.
 
-### HasStack
+## HasStack
 
 Use `stackerr.HasStack` to determine if there is a stack trace in the unwrap chain for an error.
 
