@@ -8,7 +8,8 @@ A simple Go error library that provides stack traces.
 
 One of the biggest differences between errors in Go and exceptions in other languages
 is that you don't get a stack trace with a Go error. The `stackerr` package fixes this
-limitation.
+limitation. The `stackerr` package supports the error improvements in Go 1.13, with custom
+`Is` and `Unwrap` methods.
 
 ## Creating an error with a stack trace
 
